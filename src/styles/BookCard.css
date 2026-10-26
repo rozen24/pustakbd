@@ -1,0 +1,81 @@
+/* ---------- Card lift ---------- */
+.book-card {
+  transition: transform 0.4s ease;
+}
+.book-card:hover {
+  transform: translateY(-4px);
+}
+
+/* ---------- Cover frame (border + shadow) ---------- */
+.book-card__cover {
+  box-shadow:
+    inset 4px 0 6px -4px rgb(0 0 0 / 0.35),
+    0 0 0 1px var(--border, rgb(0 0 0 / 0.1));
+  transition: box-shadow 0.4s ease;
+}
+.book-card:hover .book-card__cover {
+  box-shadow:
+    inset 4px 0 6px -4px rgb(0 0 0 / 0.35),
+    0 12px 24px -12px rgb(0 0 0 / 0.45),
+    0 0 0 1px var(--border, rgb(0 0 0 / 0.1));
+}
+
+/* ---------- Cover image: scales DOWN on hover ---------- */
+.book-card__img {
+  width: 100%;
+  height: 100%;
+  transform: scale(1);
+  transition: transform 1.5s ease;
+}
+.book-card:hover .book-card__img {
+  transform: scale(0.94);
+}
+
+/* ---------- 4 action icons: fade in on hover ---------- */
+.book-card__actions {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.35s ease;
+}
+.book-card:hover .book-card__actions,
+.book-card:focus-within .book-card__actions {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Each icon button's own hover feedback */
+.book-card__icon-btn {
+  transition: transform 1.2s ease, box-shadow 1.2s ease;
+}
+.book-card__icon-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px -2px rgb(0 0 0 / 0.25);
+}
+.book-card__icon-btn:active {
+  transform: scale(0.95);
+}
+
+/* Touch screens (no hover): icons always visible */
+@media (hover: none) {
+  .book-card__actions {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .book-card,
+  .book-card__cover,
+  .book-card__img,
+  .book-card__actions,
+  .book-card__icon-btn {
+    transition: none;
+  }
+  .book-card:hover {
+    transform: none;
+  }
+  .book-card:hover .book-card__img {
+    transform: none;
+  }
+}
